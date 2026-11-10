@@ -1,0 +1,53 @@
+paths:
+  sd_dir: ./pretrained/stable-diffusion-2-1-base
+  sam_ckpt: ./pretrained/sam_vit_b_01ec64.pth
+  llava_dir: ./pretrained/llava-1.5-7b-hf
+  data_dir: ./data/llvip_lessnew
+  output_dir: ./output/llvip
+model:
+  timestep: 1
+  lora_rank_unet: 4
+  lora_rank_vae: 4
+  sam_lambda: 0.1
+  sd_fp16: true
+training:
+  batch_size: 2
+  gradient_accumulation_steps: 2
+  learning_rate: 5.0e-05
+  max_steps: 6000
+  warmup_steps: 500
+  max_grad_norm: 1.0
+  seed: 42
+  checkpoint_every: 500
+  eval_every: 1000
+  resume: null
+  sam_precompute: false
+loss:
+  lambda_l2: 1.0
+  lambda_ssim: 1.0
+  lambda_jgrad: 1.0
+  lambda_sem: 2.0
+prompt:
+  use_text: true
+  refresh_every_steps: 1000000
+  refresh_at_start: true
+  cache_dir: ./output/llvip/prompt_cache
+  test_captions_dir: ./output/llvip/prompt_cache/test_captions_lessnew
+  llava_max_new_tokens: 77
+  llava_load_in_8bit: false
+data:
+  image_size: 256
+  train_split: train
+  test_split: test
+  expected_train_pairs: null
+  expected_test_pairs: 50
+  num_workers: 2
+  test_set: llvip2s
+  degraded_subdir: noisy/test
+  degraded_vi_dir: vi
+  dataset_name: llvip
+  test_ids_file: ./llvip_test_ids.txt
+test:
+  output_dir: ./output/llvip/test_results
+  save_g1_g2_g3: true
+  save_png: true
