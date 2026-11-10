@@ -1,0 +1,27 @@
+name: lfsdfusion
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip
+  - pip:
+    - --extra-index-url https://download.pytorch.org/whl/cu130
+    - torch==2.11.0+cu130
+    - torchvision==0.26.0
+    - diffusers==0.38.0
+    - peft==0.21.2
+    - transformers==5.7.0
+    - accelerate==1.15.0
+    - kornia==0.8.2
+    - lpips
+    - segment-anything
+    - opencv-python
+    - scikit-image
+    - scikit-learn
+    - scipy
+    - pandas
+    - numpy
+    - pillow
+    - pyyaml
+    - tqdm
+    - sewar
